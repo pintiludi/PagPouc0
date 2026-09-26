@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PagPouco — Tenha grandes resultados.</title>
+
+    <meta
+        name="description"
+        content="PagPouco — plataforma de catálogo e gerenciamento de cotas."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #070707;
+            --black-2: #0d0d0f;
+            --crimson: #8f0924;
+            --crimson-2: #b30d32;
+            --dark-red: #3b0714;
+            --neon: #ff174f;
+            --white: #f7f7f7;
+            --gray: #9b9b9b;
+            --border: rgba(255, 23, 79, .25);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 80% 10%, rgba(143, 9, 36, .20), transparent 30%),
+                radial-gradient(circle at 10% 60%, rgba(179, 13, 50, .08), transparent 30%),
+                var(--black);
+
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            background: rgba(7, 7, 7, .86);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #bdbdbd;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            border: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* GENERAL */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 22px;
+        }
+
+        section {
+            padding: 90px 0;
+        }
+
+        .eyebrow {
+            color: var(--neon);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: .95;
+            letter-spacing: -4px;
+        }
+
+        h2 {
+            font-size: clamp(30px, 5vw, 46px);
+            letter-spacing: -2px;
+            margin-bottom: 14px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            max-width: 620px;
+            line-height: 1.7;
+        }
+
+        /* BUTTONS */
+
+        .button {
+            border: 1px solid var(--neon);
+            background: linear-gradient(
+                135deg,
+                var(--crimson),
+                #5d0719
+            );
+
+            color: white;
+            border-radius: 12px;
+            padding: 14px 22px;
+            cursor: pointer;
+            font-weight: 700;
+
+            box-shadow:
+                0 0 20px rgba(255, 23, 79, .12);
+
+            transition: .25s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 28px rgba(255, 23, 79, .30);
+        }
+
+        .button.secondary {
+            background: transparent;
+            border-color: rgba(255,255,255,.15);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 720px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -150px;
+            top: 100px;
+
+            border: 1px solid rgba(255,23,79,.12);
+            transform: rotate(45deg);
+        }
+
+        .hero-content {
+            max-width: 760px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--neon);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* OPPORTUNITIES */
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(59,7,20,.9),
+                    rgba(14,14,16,.95)
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+
+            min-height: 250px;
+
+            display: flex;
+            flex-direction: column;
+
+            transition: .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,23,79,.65);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.4),
+                0 0 25px rgba(255,23,79,.08);
+        }
+
+        .brand {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #111;
+            border: 1px solid rgba(255,255,255,.08);
+
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--gray);
+            font-size: 13px;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 18px 0;
+        }
+
+        .card .button {
+            width: 100%;
+        }
+
+        /* REGISTER */
+
+        .register-box {
+            max-width: 650px;
+            background: linear-gradient(
+                145deg,
+                rgba(59,7,20,.8),
+                rgba(15,15,15,.9)
+            );
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 32px;
+        }
+
+        label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            background: #090909;
+            border: 1px solid rgba(255,255,255,.12);
+            color: white;
+
+            border-radius: 10px;
+            padding: 15px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--neon);
+            box-shadow: 0 0 15px rgba(255,23,79,.08);
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .code-result {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+
+            border-radius: 15px;
+            background: #080808;
+            border: 1px solid var(--border);
+        }
+
+        .code {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin: 12px 0 20px;
+            color: var(--neon);
+        }
+
+        .warning {
+            color: #ddd;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        /* INFO */
+
+        .info {
+            border-top: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            background: rgba(255,255,255,.015);
+        }
+
+        .info-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-item {
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 15px;
+        }
+
+        .info-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .info-item p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid rgba(255,255,255,.06);
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* MODAL */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.78);
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+            z-index: 200;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 550px;
+
+            background: #0c0c0d;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .quantity {
+            margin: 30px 0;
+        }
+
+        .quantity-value {
+            font-size: 35px;
+            font-weight: 900;
+            margin: 12px 0 18px;
+            color: var(--neon);
+        }
+
+        input[type="range"] {
+            padding: 0;
+            accent-color: var(--neon);
+        }
+
+        .total-box {
+            padding: 20px;
+            background: #080808;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,.06);
+            margin-bottom: 20px;
+        }
+
+        .total {
+            font-size: 30px;
+            font-weight: 900;
+            margin-top: 7px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 950px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 700px) {
+            nav {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .hero {
+                min-height: 620px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .info-box {
+                grid-template-columns: 1fr;
+            }
+
+            .register-box {
+                padding: 22px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+
+        <a href="#" class="logo">
+            Pag<span>Pouco</span>
+        </a>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#cotas">Cotas</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#cadastro">Meu cadastro</a>
+        </nav>
+
+        <button class="menu-button" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero" id="inicio">
+
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    Plataforma PagPouco
+                </div>
+
+                <h1>
+                    Tenha grandes
+                    <span>resultados.</span>
+                </h1>
+
+                <p class="subtitle">
+                    Explore o catálogo promocional PagPouco,
+                    acompanhe suas aquisições e tenha seus registros
+                    organizados em um único lugar.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="button"
+                        onclick="scrollToSection('cotas')"
+                    >
+                        Visualizar cotas
+                    </button>
+
+                    <button
+                        class="button secondary"
+                        onclick="scrollToSection('cadastro')"
+                    >
+                        Criar cadastro
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COTAS -->
+
+    <section id="cotas">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="eyebrow">
+                    Catálogo
+                </div>
+
+                <h2>
+                    Contas promocionais
+                </h2>
+
+                <p class="subtitle">
+                    Disponíveis por tempo ilimitado*
+                </p>
+
+            </div>
+
+
+            <div class="cards" id="cardsContainer"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMO FUNCIONA -->
+
+    <section
+        class="info"
+        id="como-funciona"
+    >
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="eyebrow">
+                    Processo
+                </div>
+
+                <h2>
+                    Como funciona
+                </h2>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-item">
+
+                    <h3>01 — Crie seu cadastro</h3>
+
+                    <p>
+                        Informe seu nome e receba um código
+                        exclusivo de 10 dígitos.
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <h3>02 — Escolha uma cota</h3>
+
+                    <p>
+                        Consulte as opções disponíveis no
+                        catálogo e selecione a quantidade desejada.
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <h3>03 — Realize o pagamento</h3>
+
+                    <p>
+                        O checkout poderá disponibilizar os
+                        métodos de pagamento configurados pelo
+                        gateway oficial.
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <h3>04 — Acompanhe seus registros</h3>
+
+                    <p>
+                        Após a confirmação do pagamento pelo
+                        gateway, os registros correspondentes
+                        poderão ser associados ao seu cadastro.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CADASTRO -->
+
+    <section id="cadastro">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div class="eyebrow">
+                    Cadastro
+                </div>
+
+                <h2>
+                    Crie seu cadastro PagPouco
+                </h2>
+
+                <p class="subtitle">
+                    Gere seu código exclusivo para localizar
+                    seus registros posteriormente.
+                </p>
+
+            </div>
+
+
+            <div class="register-box">
+
+                <div class="input-group">
+
+                    <label for="fullName">
+                        Nome completo
+                    </label>
+
+                    <input
+                        id="fullName"
+                        type="text"
+                        placeholder="Digite seu nome completo"
+                    >
+
+                </div>
+
+
+                <button
+                    class="button"
+                    onclick="createUser()"
+                >
+                    Criar cadastro
+                </button>
+
+
+                <div
+                    class="code-result"
+                    id="codeResult"
+                >
+
+                    <strong>
+                        Seu código PagPouco
+                    </strong>
+
+                    <div
+                        class="code"
+                        id="userCode"
+                    ></div>
+
+
+                    <p class="warning">
+
+                        <strong>
+                            GUARDE SEU CÓDIGO COM SEGURANÇA
+                        </strong>
+                        <br><br>
+
+                        Este código é exclusivo do seu cadastro.
+                        Quando a plataforma principal estiver
+                        novamente disponível, ele poderá ser utilizado
+                        para localizar e recuperar os registros de
+                        cotas associados ao cadastro, conforme os
+                        dados armazenados pelo sistema.
+
+                    </p>
+
+
+                    <button
+                        class="button secondary"
+                        onclick="copyCode()"
+                    >
+                        Copiar meu código
+                    </button>
+
+                    <button
+                        class="button"
+                        onclick="saveCode()"
+                        style="margin-top:10px;"
+                    >
+                        Salvar código
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AVISO -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="info-item">
+
+                <h3>
+                    Informações importantes
+                </h3>
+
+                <p>
+                    As informações apresentadas nesta plataforma
+                    referem-se às condições e aos produtos
+                    cadastrados no próprio PagPouco.
+                    Nomes de marcas podem ser utilizados apenas
+                    como identificação ou referência de categoria
+                    e não significam parceria, patrocínio,
+                    participação ou endosso dessas empresas.
+
+                    <br><br>
+
+                    Qualquer produto de investimento ou instrumento
+                    financeiro eventualmente oferecido deve possuir
+                    as informações regulatórias, legais e de risco
+                    aplicáveis antes de sua disponibilização.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        © 2026 PagPouco — Todos os direitos reservados.
+
+    </div>
+
+</footer>
+
+
+<!-- MODAL DA COTA -->
+
+<div
+    class="modal"
+    id="quotaModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-top">
+
+            <h2 id="modalTitle">
+                Cota
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p
+            class="subtitle"
+            id="modalDescription"
+        ></p>
+
+
+        <div class="quantity">
+
+            <strong>
+                Quantidade de cotas
+            </strong>
+
+            <div
+                class="quantity-value"
+                id="quantityText"
+            >
+                1
+            </div>
+
+            <input
+                type="range"
+                id="quantitySlider"
+                min="1"
+                max="100"
+                value="1"
+                oninput="updateQuantity()"
+            >
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:space-between;
+                    color:#777;
+                    font-size:12px;
+                    margin-top:8px;
+                "
+            >
+                <span>1</span>
+                <span>100</span>
+            </div>
+
+        </div>
+
+
+        <div class="total-box">
+
+            <div>
+                Valor unitário
+            </div>
+
+            <strong id="unitPrice">
+                R$ 0,00
+            </strong>
+
+
+            <div style="margin-top:15px;">
+                Total
+            </div>
+
+            <div
+                class="total"
+                id="totalPrice"
+            >
+                R$ 0,00
+            </div>
+
+        </div>
+
+
+        <button
+            class="button"
+            style="width:100%;"
+            onclick="startCheckout()"
+        >
+            Adquirir cotas
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+     * =========================================================
+     * CONFIGURAÇÃO
+     * =========================================================
+     *
+     * Estes dados são apenas exemplos para a interface.
+     *
+     * Em produção:
+     *
+     * - preços devem vir do backend;
+     * - disponibilidade deve vir do banco;
+     * - pagamento deve ser criado pelo backend;
+     * - nunca coloque TOKEN SECRET neste arquivo.
+     */
+
+    const quotas = [
+        {
+            id: "tiktok",
+            name: "TikTok",
+            description:
+                "Cota vinculada à categoria TikTok dentro do catálogo promocional PagPouco.",
+            price: 10
+        },
+
+        {
+            id: "itau",
+            name: "Itaú",
+            description:
+                "Cota vinculada à categoria Itaú dentro do catálogo promocional PagPouco.",
+            price: 15
+        },
+
+        {
+            id: "bradesco",
+            name: "Bradesco",
+            description:
+                "Cota vinculada à categoria Bradesco dentro do catálogo promocional PagPouco.",
+            price: 15
+        },
+
+        {
+            id: "petrobras",
+            name: "Petrobras",
+            description:
+                "Cota vinculada à categoria Petrobras dentro do catálogo promocional PagPouco.",
+            price: 20
+        },
+
+        {
+            id: "netflix",
+            name: "Netflix",
+            description:
+                "Cota vinculada à categoria Netflix dentro do catálogo promocional PagPouco.",
+            price: 12
+        },
+
+        {
+            id: "shein",
+            name: "Shein",
+            description:
+                "Cota vinculada à categoria Shein dentro do catálogo promocional PagPouco.",
+            price: 10
+        },
+
+        {
+            id: "mercadolivre",
+            name: "Mercado Livre",
+            description:
+                "Cota vinculada à categoria Mercado Livre dentro do catálogo promocional PagPouco.",
+            price: 10
+        },
+
+        {
+            id: "shopee",
+            name: "Shopee",
+            description:
+                "Cota vinculada à categoria Shopee dentro do catálogo promocional PagPouco.",
+            price: 10
+        }
+    ];
+
+
+    let selectedQuota = null;
+
+
+    /*
+     * =========================================================
+     * RENDERIZAÇÃO DAS COTAS
+     * =========================================================
+     */
+
+    function renderQuotas() {
+
+        const container =
+            document.getElementById("cardsContainer");
+
+        container.innerHTML = "";
+
+
+        quotas.forEach(quota => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "card";
+
+
+            card.innerHTML = `
+
+                <div class="brand">
+                    ${quota.name.substring(0, 2).toUpperCase()}
+                </div>
+
+                <h3>
+                    ${quota.name}
+                </h3>
+
+                <p>
+                    ${quota.description}
+                </p>
+
+                <div class="price">
+                    R$ ${quota.price.toFixed(2).replace(".", ",")}
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openQuota('${quota.id}')"
+                >
+                    Visualizar cota
+                </button>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+
+    /*
+     * =========================================================
+     * MODAL
+     * =========================================================
+     */
+
+    function openQuota(id) {
+
+        selectedQuota =
+            quotas.find(quota => quota.id === id);
+
+        if (!selectedQuota) return;
+
+
+        document.getElementById("modalTitle")
+            .textContent =
+            "Cota " + selectedQuota.name;
+
+
+        document.getElementById("modalDescription")
+            .textContent =
+            selectedQuota.description;
+
+
+        document.getElementById("unitPrice")
+            .textContent =
+            formatMoney(selectedQuota.price);
+
+
+        document.getElementById("quantitySlider")
+            .value = 1;
+
+
+        updateQuantity();
+
+
+        document
+            .getElementById("quotaModal")
+            .classList.add("active");
+
+    }
+
+
+    function closeModal() {
+
+        document
+            .getElementById("quotaModal")
+            .classList.remove("active");
+
+    }
+
+
+    /*
+     * =========================================================
+     * QUANTIDADE
+     * =========================================================
+     */
+
+    function updateQuantity() {
+
+        if (!selectedQuota) return;
+
+
+        const quantity =
+            Number(
+                document.getElementById("quantitySlider").value
+            );
+
+
+        const total =
+            quantity * selectedQuota.price;
+
+
+        document.getElementById("quantityText")
+            .textContent =
+            quantity + (quantity === 1 ? " cota" : " cotas");
+
+
+        document.getElementById("totalPrice")
+            .textContent =
+            formatMoney(total);
+
+    }
+
+
+    /*
+     * =========================================================
+     * CHECKOUT
+     * =========================================================
+     *
+     * IMPORTANTE:
+     *
+     * Não processar pagamento diretamente no navegador.
+     *
+     * O correto será:
+     *
+     * POST /api/orders
+     *
+     * backend valida:
+     *
+     * - usuário
+     * - cota
+     * - preço atual
+     * - quantidade
+     *
+     * depois cria o pagamento no gateway.
+     */
+
+    async function startCheckout() {
+
+        if (!selectedQuota) return;
+
+
+        const quantity =
+            Number(
+                document.getElementById("quantitySlider").value
+            );
+
+
+        const request = {
+
+            quotaId: selectedQuota.id,
+
+            quantity: quantity
+
+        };
+
+
+        console.log(
+            "Checkout:",
+            request
+        );
+
+
+        /*
+         * FUTURO BACKEND:
+         *
+         * const response = await fetch("/api/orders", {
+         *     method: "POST",
+         *     headers: {
+         *         "Content-Type": "application/json"
+         *     },
+         *     body: JSON.stringify(request)
+         * });
+         *
+         * const order = await response.json();
+         *
+         * window.location.href =
+         *     "/checkout.html?order=" + order.id;
+         */
+
+
+        alert(
+            "Checkout preparado. O backend de pagamentos ainda precisa ser conectado."
+        );
+
+    }
+
+
+    /*
+     * =========================================================
+     * CADASTRO
+     * =========================================================
+     *
+     * ATENÇÃO:
+     *
+     * Este gerador abaixo serve apenas para demonstração.
+     *
+     * Em produção o código precisa ser criado pelo servidor
+     * e possuir UNIQUE INDEX no PostgreSQL.
+     */
+
+    function generateDemoCode() {
+
+        let code = "";
+
+        for (let i = 0; i < 10; i++) {
+
+            code +=
+                Math.floor(Math.random() * 10);
+
+        }
+
+        return code;
+
+    }
+
+
+    async function createUser() {
+
+        const name =
+            document
+                .getElementById("fullName")
+                .value
+                .trim();
+
+
+        if (!name) {
+
+            alert(
+                "Digite seu nome completo."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * FUTURO BACKEND:
+         *
+         * const response = await fetch("/api/users", {
+         *     method: "POST",
+         *     headers: {
+         *         "Content-Type": "application/json"
+         *     },
+         *     body: JSON.stringify({
+         *         name
+         *     })
+         * });
+         *
+         * const user = await response.json();
+         *
+         * const code = user.code;
+         */
+
+
+        const code =
+            generateDemoCode();
+
+
+        document.getElementById("userCode")
+            .textContent = code;
+
+
+        document.getElementById("codeResult")
+            .style.display = "block";
+
+
+        localStorage.setItem(
+            "pagpouco_demo_code",
+            code
+        );
+
+    }
+
+
+    function copyCode() {
+
+        const code =
+            document.getElementById("userCode")
+                .textContent;
+
+
+        navigator.clipboard.writeText(code);
+
+
+        alert(
+            "Código copiado!"
+        );
+
+    }
+
+
+    function saveCode() {
+
+        const code =
+            document.getElementById("userCode")
+                .textContent;
+
+
+        const blob =
+            new Blob(
+                [
+                    "Meu código PagPouco: " +
+                    code
+                ],
+                {
+                    type: "text/plain"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const a =
+            document.createElement("a");
+
+
+        a.href = url;
+
+        a.download =
+            "codigo-pagpouco.txt";
+
+
+        a.click();
+
+
+        URL.revokeObjectURL(url);
+
+    }
+
+
+    /*
+     * =========================================================
+     * UTILIDADES
+     * =========================================================
+     */
+
+    function formatMoney(value) {
+
+        return value.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+    }
+
+
+    function scrollToSection(id) {
+
+        document
+            .getElementById(id)
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function toggleMenu() {
+
+        const nav =
+            document.querySelector("nav");
+
+
+        if (
+            nav.style.display === "flex"
+        ) {
+
+            nav.style.display = "none";
+
+        } else {
+
+            nav.style.display = "flex";
+
+            nav.style.flexDirection =
+                "column";
+
+            nav.style.position =
+                "absolute";
+
+            nav.style.top =
+                "70px";
+
+            nav.style.right =
+                "20px";
+
+            nav.style.background =
+                "#0c0c0d";
+
+            nav.style.padding =
+                "20px";
+
+            nav.style.border =
+                "1px solid rgba(255,23,79,.25)";
+
+            nav.style.borderRadius =
+                "15px";
+
+        }
+
+    }
+
+
+    /*
+     * =========================================================
+     * INICIALIZAÇÃO
+     * =========================================================
+     */
+
+    renderQuotas();
+
+</script>
+
+</body>
+  </html>
